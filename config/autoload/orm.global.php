@@ -12,13 +12,5 @@ return [
                 ],
             ]
         ],
-        'migrations_configuration' => [
-            'orm_default' => [
-                'directory' => 'data/orm/migrations',
-                'name' => 'Skeleton',
-                'namespace' => 'DoctrineMigrations',
-                'table' => 'doctrine_migration_versions',
-            ],
-        ],
     ],
 ];
