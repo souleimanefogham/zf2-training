@@ -20,21 +20,22 @@
     <!-- generate config -->
     <target name="generate-config">
 
-        <!-- ORM -->
-        <loadfile property="db.config"
-                  file="${project.basedir}/config/autoload/orm.local.php.dist">
+        <copy todir="${project.basedir}/config"
+              overwrite="true">
+            <fileset dir="${project.basedir}/config">
+                <include name="**/*.local.php.dist" />
+            </fileset>
+            <mapper type="glob" from="*.local.php.dist" to="*.local.php" />
             <filterchain>
                 <replacetokens>
-                    <token key="host" value="${db.host}"/>
-                    <token key="port" value="${db.port}"/>
-                    <token key="username" value="${db.username}"/>
-                    <token key="password" value="${db.password}"/>
-                    <token key="dbname" value="${db.dbname}"/>
+                    <token key="db.host" value="${db.host}" />
+                    <token key="db.port" value="${db.port}" />
+                    <token key="db.dbname" value="${db.dbname}" />
+                    <token key="db.username" value="${db.username}" />
+                    <token key="db.password" value="${db.password}" />
                 </replacetokens>
             </filterchain>
-        </loadfile>
-        <echo msg="${db.config}"
-              file="./config/autoload/orm.local.php"/>
+        </copy>
 
     </target>
     
