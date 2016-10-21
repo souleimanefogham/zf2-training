@@ -2,4 +2,13 @@
 <ruleset name="continuousphp-phing-tasks">
     <description>PSR2 Coding standard</description>
     <rule ref="PSR2"/>
+    <file>module/Application/src</file>
+    <file>module/Application/tests</file>
+    <arg name="extensions" value="php"/>
+    <exclude-pattern>init_autoloader.php</exclude-pattern>
+    <exclude-pattern>features/**</exclude-pattern>
+    <exclude-pattern>config/**</exclude-pattern>
+    <exclude-pattern>data/**</exclude-pattern>
+    <exclude-pattern>public/**</exclude-pattern>
+    <exclude-pattern>vendor/**</exclude-pattern>
 </ruleset>
