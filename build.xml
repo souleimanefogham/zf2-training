@@ -23,7 +23,8 @@
         <echo file="${project.basedir}/data/db/create.sql">
             CREATE DATABASE IF NOT EXISTS ${db.dbname};
         </echo>
-        <pdosqlexec url="mysql:host=${db.host}" userid="${db.username}" password="${db.password}">
+        <pdosqlexec url="mysql:host=${db.host}"
+                    userid="${db.username}" password="${db.password}">
             <transaction src="${project.basedir}/data/db/create.sql"/>
         </pdosqlexec>
         <delete dir="${project.basedir}/data/db" quiet="true"/>
@@ -31,11 +32,11 @@
 
     <!-- Migrate Database -->
     <target name="migrate-db" description="Update the database version">
-        <exec command="${doctrine.bin} migrations:migrate --no-interaction"
-              outputProperty="doctrine.output"/>
-        <echo msg="${doctrine.output}" />
+        <exec command="${doctrine.bin} migrations:migrate -n --ansi"
+              passthru="true"
+              returnProperty="doctrine.exitCode"/>
         <if>
-            <contains string="${doctrine.output}" substring="Could not find any migrations to execute." />
+            <equals arg1="${doctrine.exitCode}" arg2="4" />
             <else>
                 <exec command="${doctrine.bin} orm:clear-cache:metadata" passthru="true"/>
                 <exec command="${doctrine.bin} orm:clear-cache:query" passthru="true"/>
